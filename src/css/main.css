@@ -1,0 +1,8 @@
+#nav-item > .nav-item > .pad-left{
+    padding-right: 40px;
+}
+#shopping_cart{
+    position: absolute;
+    left: 96%;
+    top: 7%
+}
