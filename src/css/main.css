@@ -6,3 +6,8 @@
     left: 96%;
     top: 7%
 }
+#add_button{
+    position: absolute;
+    top: 65px;
+    margin-left: 35%;
+}

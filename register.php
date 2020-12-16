@@ -8,7 +8,7 @@
     <body>
      <!-- This is Navbar -->
      <?php include "navbar.php"; ?>
-        <div class="main-content mt-5">
+        <div class="main-content mt-5" style="height:90vh;">
         <div class="container">
         <div class="card shadow">
             <div class="row">
@@ -56,6 +56,7 @@
         </div>
     </div>
             
-        </div>
+    </div>
+    <?php include "footer.php"; ?>
     </body>
 </html>
