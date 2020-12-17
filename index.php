@@ -1,3 +1,7 @@
+<?php
+session_start();
+include "db.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +13,20 @@
      <!-- This is Navbar -->
      <?php include "navbar.php"; ?>
         <div class="main-content">
+        <?php    
+                if(isset($_SESSION['success']))
+                {
+            ?>
+                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <?php echo $_SESSION['success'] ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php
+                }
+                unset($_SESSION['success']);
+            ?>
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>

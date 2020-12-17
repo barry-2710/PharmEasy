@@ -1,3 +1,7 @@
+<?php
+include "db.php";
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,42 +41,6 @@
                             </div>
                         </div>
                     </div>     
-                    
-                    <div class="col-lg-4 pb-3">
-                        <div class="card" style="width: 25rem;">
-                            <div class="card-body">
-                                <h5 class="card-title text-truncate">Full Body Checkup</h5>
-                                <p class="card-text text-muted">Includes 6 tests</p>
-                                <p class="card-text fw-bold d-inline">₹ 350.00</p>
-                                <p class="card-text text-muted d-inline" style="font-size:10pt"><del>(Rs 650.00)</del></p>
-                                <button class="btn btn-secondary mt-3 float-right" id="add_button">Add to cart</button>
-                            </div>
-                        </div>
-                    </div>       
-                    <div class="col-lg-4 pb-3">
-                        <div class="card" style="width: 25rem;">
-                            <div class="card-body">
-                                <h5 class="card-title text-truncate">Full Body Checkup</h5>
-                                <p class="card-text text-muted">Includes 6 tests</p>
-                                <p class="card-text fw-bold d-inline">₹ 350.00</p>
-                                <p class="card-text text-muted d-inline" style="font-size:10pt"><del>(Rs 650.00)</del></p>
-                                <button class="btn btn-secondary mt-3 float-right" id="add_button">Add to cart</button>
-                            </div>
-                        </div>
-                    </div>  
-                    <div class="col-lg-4 pb-3">
-                        <div class="card" style="width: 25rem;">
-                            <div class="card-body">
-                                <h5 class="card-title text-truncate">Full Body Checkup</h5>
-                                <p class="card-text text-muted">Includes 6 tests</p>
-                                <p class="card-text fw-bold d-inline">₹ 350.00</p>
-                                <p class="card-text text-muted d-inline" style="font-size:10pt"><del>(Rs 650.00)</del></p>
-                                <button class="btn btn-secondary mt-3 float-right" id="add_button">Add to cart</button>
-                            </div>
-                        </div>
-                    </div>   
-
-
                 </div>
            </div>
            

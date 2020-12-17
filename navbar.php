@@ -1,3 +1,15 @@
+<?php
+    include "db.php";
+    if(isset($_SESSION['id'])){
+        $id = $_SESSION['id'];
+    }
+    else{
+        $id = 0;
+    } 
+    $total_pages_sql = "SELECT COUNT(*) FROM cart WHERE user_id=$id";
+    $result = mysqli_query($db,$total_pages_sql);
+    $total_rows = mysqli_fetch_array($result)[0];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,9 +49,19 @@
                     <li class="nav-item">
                     <a class="nav-link text-white pad-left" href="lab.php">Tests</a>
                     </li>
+                    <?php 
+                        if(isset($_SESSION["loggedin"])) {
+                    ?>
                     <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white dropstart pad-left" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        User
+                        <?php 
+                        if(isset($_SESSION["loggedin"])) {
+                            echo $_SESSION["username"];
+                        }
+                        else{
+                            echo "user";
+                        }
+                        ?>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                         <li><a class="dropdown-item" href="profile.php">Profile</a></li>
@@ -47,9 +69,15 @@
                         <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                     </ul>
                     </li>
+                    <?php }else{
+                    ?>
+                    <li class="nav-item">
+                    <a class="nav-link text-white  pad-left" href="login.php">Login/Register</a>
+                    </li>
+                    <?php } ?>
                     <li class="nav-item">
                         <a class="nav-link text-white  pad-left" href="cartlist.php" tabindex="-1" aria-disabled="true"><i class="fas fa-shopping-cart"></i></a>
-                        <span class="badge rounded-pill bg-secondary border" id="shopping_cart">0</span>
+                        <span class="badge rounded-pill bg-secondary border" id="shopping_cart"><?php echo $total_rows; ?></span>
                     </li>
                 </ul>
                 </div>
