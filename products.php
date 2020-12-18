@@ -32,9 +32,9 @@ session_start();
                     <h2>Products</h2>
                 </div>
                 <div class="col-lg-6">
-                    <form class="d-flex text-center">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-secondary" type="submit">Search</button>
+                    <form action="search.php" method="post" class="d-flex text-center">
+                        <input class="form-control me-2" name="query" type="search" placeholder="Search" aria-label="Search" required>
+                        <button class="btn btn-outline-secondary" name="search_button" type="submit">Search</button>
                     </form>
                 </div>
                 <div class="col-lg-2"></div>

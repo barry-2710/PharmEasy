@@ -1,6 +1,9 @@
 <?php
 include "db.php";
 session_start();
+if(isset($_POST['search_button'])){
+    $query = $_POST['query'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,9 +16,23 @@ session_start();
      <!-- This is Navbar -->
      <?php include "navbar.php"; ?>
         <div class="main-content p-4" style="min-height:90vh;">
+        <?php    
+                if(isset($_SESSION['success']))
+                {
+            ?>
+                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <?php echo $_SESSION['success'] ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php
+                }
+                unset($_SESSION['success']);
+            ?>
            <div class="row pb-4">
-                <div class="col-lg-2">
-                    <h2>Lab Tests</h2>
+                <div class="col-lg-3">
+                    <h3>Search result for "<?php echo $query?>"</h3>
                 </div>
                 <div class="col-lg-6">
                     <form class="d-flex text-center">
@@ -23,7 +40,7 @@ session_start();
                         <button class="btn btn-outline-secondary" type="submit">Search</button>
                     </form>
                 </div>
-                <div class="col-lg-2"></div>
+                <div class="col-lg-1"></div>
                 <div class="col-lg-2">
                 Sort by : <span class="badge bg-secondary p-2">High-Low</span> <span class="badge bg-secondary p-2">Low-High</span>
                 </div>
@@ -44,18 +61,20 @@ session_start();
                 } 
                 $no_of_records_per_page = 18;
                 $offset = ($pageno-1) * $no_of_records_per_page;
-                $total_pages_sql = "SELECT COUNT(*) FROM products WHERE category='lab'";
+                $total_pages_sql = "SELECT COUNT(*) FROM products WHERE category='product'";
                 $result = mysqli_query($db,$total_pages_sql);
                 $total_rows = mysqli_fetch_array($result)[0];
                 $total_pages = ceil($total_rows / $no_of_records_per_page);
-                $sql = "SELECT product_id, name, description,image,category,MRP,final_cost, created_at FROM products WHERE category='lab' LIMIT $offset, $no_of_records_per_page";
+                $sql = "SELECT product_id, name, description,image,category,MRP,final_cost, created_at FROM products WHERE name like '%{$query}%' || description like '%{$query}%' LIMIT $offset, $no_of_records_per_page";
                 $res=$db->query($sql);
                 if($res->num_rows>0){
                     $i=0;
                     while($row=$res->fetch_assoc()){
                         $i++;
-                        echo "<div class='col-lg-4 pb-3'>";
-                        echo "<div class='card' style='width: 25rem;'>";
+                        echo "<div class='col-lg-2 pb-3'>";
+                        echo "<div class='card' style='width: 14rem;'>";
+                        echo "<img src='{$row["image"]}' class='card-img-top' alt='product_image' style='height: 224px;'>";
+                        echo "<hr>";
                         echo "<div class='card-body'>";
                         echo "<h5 class='card-title text-truncate'>{$row["name"]}</h5>";
                         echo " <p class='card-text text-muted text-truncate'>{$row["description"]}</p>";
@@ -70,9 +89,9 @@ session_start();
                         echo "</div>";
                         echo "</div>";
                     }
-                } 
+                }
                 else{
-                    echo "<div class='container text-center text-dark'><h4>No products yet, Comming Soon..</h4></div>";
+                    echo "<div class='container text-center text-dark'><h4>Sorry, no records found</h4></div>";
                 }
             ?>
                 </div>

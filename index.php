@@ -15,7 +15,7 @@ include "db.php";
         <div class="main-content">
         <?php    
                 if(isset($_SESSION['success']))
-                {
+                { 
             ?>
                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <?php echo $_SESSION['success'] ?>
@@ -60,75 +60,58 @@ include "db.php";
             <div class="container p-2">
                 <h3 class="text-uppercase text-center mb-4 mt-4">Our Products</h3>
                 <div class="row">
-                    <div class="col-lg-2">
-                        <div class="card" style="width: 11rem;">
-                            <img src="src/img/products/mask.jpg" class="card-img-top border" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title text-truncate">N-95 Mask</h5>
-                                <p class="card-text text-muted">6 mask in one pack</p>
-                                <p class="card-text fw-bold d-inline">Rs 350.00</p>
-                                <p class="card-text text-muted d-inline" style="font-size:10pt"><del>(Rs 650.00)</del></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="card" style="width: 11rem;">
-                            <img src="src/img/products/mask.jpg" class="card-img-top border" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title text-truncate">N-95 Mask</h5>
-                                <p class="card-text text-muted">6 mask in one pack</p>
-                                <p class="card-text fw-bold d-inline">Rs 350.00</p>
-                                <p class="card-text text-muted d-inline" style="font-size:10pt"><del>(Rs 650.00)</del></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="card" style="width: 11rem;">
-                            <img src="src/img/products/mask.jpg" class="card-img-top border" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title text-truncate">N-95 Mask</h5>
-                                <p class="card-text text-muted">6 mask in one pack</p>
-                                <p class="card-text fw-bold d-inline">Rs 350.00</p>
-                                <p class="card-text text-muted d-inline" style="font-size:10pt"><del>(Rs 650.00)</del></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="card" style="width: 11rem;">
-                            <img src="src/img/products/mask.jpg" class="card-img-top border" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title text-truncate">N-95 Mask</h5>
-                                <p class="card-text text-muted">6 mask in one pack</p>
-                                <p class="card-text fw-bold d-inline">Rs 350.00</p>
-                                <p class="card-text text-muted d-inline" style="font-size:10pt"><del>(Rs 650.00)</del></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="card" style="width: 11rem;">
-                            <img src="src/img/products/mask.jpg" class="card-img-top border" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title text-truncate">N-95 Mask</h5>
-                                <p class="card-text text-muted">6 mask in one pack</p>
-                                <p class="card-text fw-bold d-inline">Rs 350.00</p>
-                                <p class="card-text text-muted d-inline" style="font-size:10pt"><del>(Rs 650.00)</del></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="card" style="width: 11rem;">
-                            <img src="src/img/products/mask.jpg" class="card-img-top border" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title text-truncate">N-95 Mask</h5>
-                                <p class="card-text text-muted">6 mask in one pack</p>
-                                <p class="card-text fw-bold d-inline">Rs 350.00</p>
-                                <p class="card-text text-muted d-inline" style="font-size:10pt"><del>(Rs 650.00)</del></p>
-                            </div>
-                        </div>
-                    </div>
+                <?php
+                if (isset($_GET['pageno'])) {
+                    $pageno = $_GET['pageno'];
+                } else {
+                    $pageno = 1;
+                }
+                if(isset($_SESSION['id'])){
+                    $id = $_SESSION['id'];
+                }
+                else{
+                    $id = 0;
+                } 
+                $sql = "SELECT product_id, name, description,image,category,MRP,final_cost, created_at FROM products WHERE category='product' LIMIT 6";
+                $res=$db->query($sql);
+                if($res->num_rows>0){
+                    $i=0;
+                    while($row=$res->fetch_assoc()){
+                        $i++;
+                        echo "<div class='col-lg-2 pb-3'>";
+                        echo "<div class='card' style='width: 14rem;'>";
+                        echo "<img src='{$row["image"]}' class='card-img-top' alt='product_image' style='height: 224px;'> ";
+                        echo "<hr>";
+                        echo "<div class='card-body'>";
+                        echo "<h5 class='card-title text-truncate'>{$row["name"]}</h5>";
+                        echo " <p class='card-text text-muted text-truncate'>{$row["description"]}</p>";
+                        echo "<p class='card-text fw-bold d-inline'>₹ {$row["final_cost"]}.00</p>";
+                        echo "<p class='card-text text-muted d-inline' style='font-size:10pt'><del> (Rs {$row["MRP"]}.00)</del></p>";
+                        echo "<form action='add_to_cart.php' method='post'>";
+                        echo "<input type='hidden' name='product_id' value='{$row["product_id"]}'>";
+                        echo "<input type='hidden' name='user_id' value='$id'>";
+                        echo "<div class='d-grid gap-2'><button class='btn btn-outline-secondary mt-3' type='submit' name='submit'>Add to cart</button></div>";
+                        echo "</form>";
+                        echo "</div>";
+                        echo "</div>";
+                        echo "</div>";
+                    }
+                } 
+                else{
+                    echo "<div class='container text-center text-dark'><h4>No products yet, Comming Soon..</h4></div>";
+                }
+            ?>
                 </div>
             </div>
-                <h6 class="text-center pt-2 text-success"><u>View All</u></h6>
+                <h6 class="text-center pt-2 mb-4"><u><a href="products.php" class="text-success">View All</a></u></h6>
+            <!-- get in touch from here -->
+            <div class=" text-center" id="get-in-touch">
+            <div id="parallax"></div>
+                <div id="hero-text">
+                    <h3 class="text-uppercase">Find all healthcare essentials to keep your health in top shape</h3>
+                </div>
+            </div>
+        </div>
             <div class="articles p-4 bg-light">
                 <h4>Health Articles</h4>
                 <div class="row">
