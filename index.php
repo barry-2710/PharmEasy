@@ -12,16 +12,14 @@ include "db.php";
     <body>
      <!-- This is Navbar -->
      <?php include "navbar.php"; ?>
-        <div class="main-content">
+        <div class="main-content ">
         <?php    
                 if(isset($_SESSION['success']))
                 { 
             ?>
                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <?php echo $_SESSION['success'] ?>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php
                 }
@@ -112,33 +110,33 @@ include "db.php";
                 </div>
             </div>
         </div>
-            <div class="articles p-4 bg-light">
-                <h4>Health Articles</h4>
+            <div class="articles p-4 bg-info">
+                <h4 class="text-white mb-3">Health Articles</h4>
                 <div class="row">
                     <div class="col-lg-4">
-                        <div class="card" style="width: 28rem;">
-                            <img src="src/img/articles/young.jpg" class="card-img-top rounded" alt="...">
+                        <div class="card bg-secondary text-white shadow" style="width: 28rem;border:none;">
+                            <img src="src/img/articles/young.jpg" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h6 class="card-title text-truncate">Want to Keep Your Heart and Brain Young? Do This</h6>
-                                <p class="card-text">Here’s a startling fact: About 3 in 4 American adults don’t get the recommended amount of physical activity, according to the Centers for Disease Control and Prevention. <a href="https://www.sharecare.com/health/aging-and-fitness/article/want-keep-heart-brain-young" target="_blank" class="fw-bold">Read More</a></p>
+                                <p class="card-text">Here’s a startling fact: About 3 in 4 American adults don’t get the recommended amount of physical activity, according to the Centers for Disease Control and Prevention. <a href="https://www.sharecare.com/health/aging-and-fitness/article/want-keep-heart-brain-young" target="_blank" class="text-white">Read More</a></p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <div class="card" style="width: 28rem;">
+                    <div class="card bg-secondary text-white shadow" style="width: 28rem;border:none;">
                             <img src="src/img/articles/art.jpg" class="card-img-top rounded" alt="...">
                             <div class="card-body">
                                 <h6 class="card-title text-truncate">The Healthy Power of Making Art</h6>
-                                <p class="card-text">Presidents, it seems, are as inclined to doddle as the rest of us. During one meeting with legislative leaders, General Eisenhower drew himself as a bold nude (from the waist up) in front of gunboats.  <a href="https://www.sharecare.com/health/art-therapy/article/healthy-power-making-art" target="_blank" class="fw-bold">Read More</a></p>
+                                <p class="card-text">Presidents, it seems, are as inclined to doddle as the rest of us. During one meeting with legislative leaders, General Eisenhower drew himself as a bold nude (from the waist up) in front of gunboats.  <a href="https://www.sharecare.com/health/art-therapy/article/healthy-power-making-art" target="_blank" class="text-white">Read More</a></p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <div class="card" style="width: 28rem;">
+                    <div class="card bg-secondary text-white shadow" style="width: 28rem;border:none;">
                             <img src="src/img/articles/workout.jpg" class="card-img-top rounded" alt="...">
                             <div class="card-body">
                                 <h6 class="card-title text-truncate">Can Workouts Make You Wealthy?</h6>
-                                <p class="card-text">The best way to keep your job might be to leave your desk. That's right: The less time you spend sitting on your bottom, the better it might be for your -- and your company's -- bottom line. <a href="https://www.sharecare.com/health/benefits-regular-exercise/article/can-workouts-make-you-wealthy" target="_blank" class="fw-bold">Read More</a></p>
+                                <p class="card-text">The best way to keep your job might be to leave your desk. That's right: The less time you spend sitting on your bottom, the better it might be for your -- and your company's -- bottom line. <a href="https://www.sharecare.com/health/benefits-regular-exercise/article/can-workouts-make-you-wealthy" target="_blank" class="text-white">Read More</a></p>
                             </div>
                         </div>
                     </div>

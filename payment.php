@@ -26,7 +26,7 @@ if(isset($_POST['submit'])){
         $payment_option = $_POST['payment_option'];
         $sql = "UPDATE users SET address='$final_address' WHERE user_id=$id";
         if($db->query($sql)){
-            echo("Done");
+            echo("");
         }
         else{
             echo("error");

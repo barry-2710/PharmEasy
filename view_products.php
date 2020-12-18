@@ -1,30 +1,25 @@
 <?php
-    include "auth.php";
-    include "db.php";
-    if(isset($_SESSION['id'])){
-        $id = $_SESSION['id'];
-    }
-    else{
-        $id = 0;
-    } 
-    $total_pages_sql = "SELECT COUNT(*) FROM orders WHERE user_id=$id";
-    $result = mysqli_query($db,$total_pages_sql);
-    $total_rows = mysqli_fetch_array($result)[0];
-    $co = $total_rows;
+include "db.php";
+include "auth.php";
 ?>
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PharmEasy</title>
-</head>
-    <body>
-     <!-- This is Navbar -->
-     <?php include "navbar.php"; ?>
-        <div class="main-content p-4" style="min-height:90vh;">
-           <h4 class="text-center mb-5">My Orders</h4>
-           <table class="table text-center table-striped align-middle  <?php  if($co <= 0 ){ echo "d-none"; } ?>" >
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+  <?php include "admin_navbar.php"; ?>
+    <div class="main-content" style="min-height:95vh;">
+        <div class="container text-center mt-4 mb-4">
+            <h2 class="text-center mb-5">All Orders</h2>
+        </div>
+
+        <div class="container mt-5 mb-5">
+            <table class="table text-center table-striped align-middle  <?php  if($total_rows > 0 ){ echo "d-none"; } ?>" >
                 <thead>
                     <tr>
                     <th scope="col">#</th>
@@ -38,27 +33,28 @@
                     <th scope="col"></th>
                     </tr>
                 </thead>
-                <tbody>
-                <?php
+                <tbody>  
+            <?php
                 if (isset($_GET['pageno'])) {
                     $pageno = $_GET['pageno'];
                 } else {
                     $pageno = 1;
                 }
-                $no_of_records_per_page = 10;
-                $offset = ($pageno-1) * $no_of_records_per_page;
-                
-                $total_pages = ceil($total_rows / $no_of_records_per_page);
+                if(isset($_SESSION['id'])){
+                    $id = $_SESSION['id'];
+                }
+                else{
+                    $id = 0;
+                } 
                 $sql = "SELECT orders.order_id, orders.payment_id, orders.delivery, orders.payment_method, orders.created_at,  products.product_id, products.name, products.description, products.image, products.final_cost
                 FROM products
-                INNER JOIN orders ON products.product_id=orders.product_id
-                where user_id=$id";
+                INNER JOIN orders ON products.product_id=orders.product_id";
                 $res=$db->query($sql);
                 if($res->num_rows>0){
                     $i=0;
                     while($row=$res->fetch_assoc()){
                         $i++;
-                       echo "<tr>";
+                        echo "<tr>";
                        echo "<th scope='row'>$i</th>";
                        echo "<td>{$row['payment_id']}</td>";
                        echo "<td><img src='{$row['image']}' alt='' height='50'></td>";
@@ -71,21 +67,35 @@
                        echo "<td>{$row['created_at']}</td>";
                        echo "</tr>";
                     }
-                }
+                } 
                 else{
-                    echo "<div class='container text-center text-dark mt-5'><h4>No Orders yet <a href='products.php'>Shop Now</a></h4></div>";
+                    echo "<div class='container text-center text-dark'><h4>No products yet, Comming Soon..</h4></div>";
                 }
             ?>
-                </tbody>
+             </tbody>
             </table>
-           
+            </div>
         </div>
-        <?php include "footer.php"; ?>
-        <script>
+    </div>
+    <ul class="pagination container pt-4 <?php if($total_rows < 19 ){ echo 'd-none'; } ?>" id="page">
+                <li><a href="?pageno=1" class="btn btn-light"><< First</a></li>
+                <li class="<?php if($pageno <= 1){ echo 'disabled'; } ?>">
+                    <a href="<?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?>" class="btn btn-light ml-3">< Prev</a>
+                </li>
+                <li class="<?php if($pageno >= $total_pages){ echo 'disabled'; } ?>">
+                    <a href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?>" class="btn btn-light ml-3">Next ></a>
+                </li>
+                <li><a href="?pageno=<?php echo $total_pages; ?>" class="btn btn-light ml-3">Last >></a></li>
+            </ul>
+    </div>
+    
+    <?php include "footer.php"; ?>
+    <script>
             var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
 var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
   return new bootstrap.Popover(popoverTriggerEl)
-})
+});
         </script>
-    </body>
+    
+  </body>
 </html>

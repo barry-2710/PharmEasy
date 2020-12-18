@@ -8,7 +8,6 @@ if(isset($_POST['submit'])){
     $sql = "DELETE FROM cart WHERE cart_id=$cart_id";
     if($db->query($sql))
     { 
-        $_SESSION['success']="Item Removed";
         header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
     else{

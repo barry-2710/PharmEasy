@@ -1,6 +1,7 @@
 <?php
 include "db.php";
 session_start();
+$query = " ";
 if(isset($_POST['search_button'])){
     $query = $_POST['query'];
 }
@@ -22,16 +23,14 @@ if(isset($_POST['search_button'])){
             ?>
                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <?php echo $_SESSION['success'] ?>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php
                 }
                 unset($_SESSION['success']);
             ?>
            <div class="row pb-4">
-                <div class="col-lg-3">
+                <div class="col-lg-6">
                     <h3>Search result for "<?php echo $query?>"</h3>
                 </div>
                 <div class="col-lg-6">
@@ -39,10 +38,6 @@ if(isset($_POST['search_button'])){
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-secondary" type="submit">Search</button>
                     </form>
-                </div>
-                <div class="col-lg-1"></div>
-                <div class="col-lg-2">
-                Sort by : <span class="badge bg-secondary p-2">High-Low</span> <span class="badge bg-secondary p-2">Low-High</span>
                 </div>
            </div>
            <div class="products p-4 bg-light">
@@ -61,7 +56,7 @@ if(isset($_POST['search_button'])){
                 } 
                 $no_of_records_per_page = 18;
                 $offset = ($pageno-1) * $no_of_records_per_page;
-                $total_pages_sql = "SELECT COUNT(*) FROM products WHERE category='product'";
+                $total_pages_sql = "SELECT COUNT(*) FROM products WHERE name like '%{$query}%' || description like '%{$query}%'";
                 $result = mysqli_query($db,$total_pages_sql);
                 $total_rows = mysqli_fetch_array($result)[0];
                 $total_pages = ceil($total_rows / $no_of_records_per_page);

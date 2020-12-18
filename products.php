@@ -19,16 +19,14 @@ session_start();
             ?>
                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <?php echo $_SESSION['success'] ?>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php
                 }
                 unset($_SESSION['success']);
             ?>
            <div class="row pb-4">
-                <div class="col-lg-2">
+                <div class="col-lg-6">
                     <h2>Products</h2>
                 </div>
                 <div class="col-lg-6">
@@ -36,10 +34,6 @@ session_start();
                         <input class="form-control me-2" name="query" type="search" placeholder="Search" aria-label="Search" required>
                         <button class="btn btn-outline-secondary" name="search_button" type="submit">Search</button>
                     </form>
-                </div>
-                <div class="col-lg-2"></div>
-                <div class="col-lg-2">
-                Sort by : <span class="badge bg-secondary p-2">High-Low</span> <span class="badge bg-secondary p-2">Low-High</span>
                 </div>
            </div>
            <div class="products p-4 bg-light">
