@@ -55,7 +55,7 @@ include "db.php";
                     <span class="visually-hidden">Next</span>
                 </a>
             </div>
-            <div class="container p-2">
+            <div class="p-4">
                 <h3 class="text-uppercase text-center mb-4 mt-4">Our Products</h3>
                 <div class="row">
                 <?php
@@ -70,13 +70,13 @@ include "db.php";
                 else{
                     $id = 0;
                 } 
-                $sql = "SELECT product_id, name, description,image,category,MRP,final_cost, created_at FROM products WHERE category='product' LIMIT 6";
+                $sql = "SELECT product_id, name, description,image,category,MRP,final_cost, created_at FROM products WHERE category='product' ORDER BY product_id desc LIMIT 6";
                 $res=$db->query($sql);
                 if($res->num_rows>0){
                     $i=0;
                     while($row=$res->fetch_assoc()){
                         $i++;
-                        echo "<div class='col-lg-2 pb-3'>";
+                        echo "<div class='col-lg-2 pb-3 pl-2'>";
                         echo "<div class='card' style='width: 14rem;'>";
                         echo "<img src='{$row["image"]}' class='card-img-top' alt='product_image' style='height: 224px;'> ";
                         echo "<hr>";

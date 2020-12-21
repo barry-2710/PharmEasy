@@ -1,6 +1,10 @@
 <?php
 include "db.php";
 include "auth.php";
+$total_orders = "SELECT COUNT(*) FROM orders";
+$result = mysqli_query($db,$total_orders);
+$total_orders = mysqli_fetch_array($result)[0];
+$count = $total_orders;
 ?>
 <!doctype html>
 <html lang="en">
@@ -9,7 +13,7 @@ include "auth.php";
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Hello, world!</title>
+    <title>PharmEasy</title>
   </head>
   <body>
   <?php include "admin_navbar.php"; ?>
@@ -19,7 +23,7 @@ include "auth.php";
         </div>
 
         <div class="container mt-5 mb-5">
-            <table class="table text-center table-striped align-middle  <?php  if($total_rows > 0 ){ echo "d-none"; } ?>" >
+            <table class="table text-center table-striped align-middle  <?php  if($count <= 0 ){ echo "d-none"; } ?>" >
                 <thead>
                     <tr>
                     <th scope="col">#</th>

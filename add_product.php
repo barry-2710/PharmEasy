@@ -9,7 +9,7 @@ include "auth.php";
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Hello, world!</title>
+    <title>PharmEasy</title>
   </head>
   <body>
   <?php include "admin_navbar.php"; ?>
@@ -113,8 +113,7 @@ include "auth.php";
 <div class="col-5">
     <label for="inputState" class="form-label">Category</label>
     <select id="inputState" name="product_category" class="form-select" required>
-      <option selected>Choose...</option>
-      <option value="product">Product</option>
+      <option selected value="product">Product</option>
       <option value="medicine">Medicine</option>
       <option value="lab">Lab</option>
     </select>

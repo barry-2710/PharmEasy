@@ -5,9 +5,11 @@ $total_customers = "SELECT COUNT(*) FROM users";
 $result = mysqli_query($db,$total_customers);
 $total_customers = mysqli_fetch_array($result)[0];
 
+
 $total_orders = "SELECT COUNT(*) FROM orders";
 $result = mysqli_query($db,$total_orders);
 $total_orders = mysqli_fetch_array($result)[0];
+$count = $total_orders;
 
 $total_products = "SELECT COUNT(*) FROM products";
 $result = mysqli_query($db,$total_products);
@@ -24,7 +26,7 @@ $sum = $row['value_sum'];
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Hello, world!</title>
+    <title>PharmEasy</title>
   </head>
   <body>
   <?php include "admin_navbar.php"; ?>
@@ -70,7 +72,7 @@ $sum = $row['value_sum'];
 
         <div class="container mt-5 mb-5">
             <h2 class="text-center mb-5">Latest Orders</h2>
-            <table class="table text-center table-striped align-middle  <?php  if($total_rows > 0 ){ echo "d-none"; } ?>" >
+            <table class="table text-center table-striped align-middle  <?php  if($count <= 0 ){ echo "d-none"; } ?>" >
                 <thead>
                     <tr>
                     <th scope="col">#</th>
